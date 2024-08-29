@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -40,14 +41,19 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findById(id));
     }
 
-    @GetMapping("/api/students")
-    public ResponseEntity<List<StudentDTO>> getAll() {
-        return ResponseEntity.ok(studentService.getAll());
-    }
-
     @DeleteMapping("/api/students/{id}")
     public ResponseEntity<StudentDTO> delete(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/api/students")
+    public ResponseEntity<List<StudentDTO>> find(@RequestParam(required = false) String email,
+                                                 @RequestParam(required = false) String firstName,
+                                                 @RequestParam(required = false) String lastName) {
+        if (firstName != null || lastName != null || email != null) {
+            return ResponseEntity.ok(studentService.find(email, firstName, lastName));
+        }
+        return ResponseEntity.ok(studentService.getAll());
     }
 }

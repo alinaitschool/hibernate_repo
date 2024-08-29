@@ -14,4 +14,6 @@ public interface StudentService {
     void deleteStudent(Long id);
 
     StudentDTO createStudent(StudentDTO studentDTO);
+
+    List<StudentDTO> find(String email, String firstName, String lastName);
 }

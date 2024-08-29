@@ -49,4 +49,10 @@ public class StudentServiceImpl implements StudentService {
         Student studentResponseEntity = studentRepository.save(studentEntityToBeSaved);
         return objectMapper.convertValue(studentResponseEntity, StudentDTO.class);
     }
+
+    @Override
+    public List<StudentDTO> find(String email, String firstName, String lastName) {
+        List<Student> students = studentRepository.findByFirstNameOrLastNameOrEmail(firstName, lastName, email);
+        return students.stream().map(student -> objectMapper.convertValue(student, StudentDTO.class)).toList();
+    }
 }
