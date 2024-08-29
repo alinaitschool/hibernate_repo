@@ -5,9 +5,14 @@ import com.github.alina.studentsmgmt.models.dtos.StudentDTO;
 import java.util.List;
 
 public interface StudentService {
-    StudentDTO updateStudent(StudentDTO studentDTO);
-    StudentDTO getStudentById(Long id);
-    List<StudentDTO> getStudents(Long id);
+    StudentDTO update(StudentDTO studentDTO);
+
+    StudentDTO findById(Long id);
+
+    List<StudentDTO> getAll();
+
     void deleteStudent(Long id);
+
     StudentDTO createStudent(StudentDTO studentDTO);
+
 }
