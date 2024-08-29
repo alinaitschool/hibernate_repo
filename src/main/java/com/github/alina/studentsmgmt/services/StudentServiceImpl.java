@@ -49,5 +49,4 @@ public class StudentServiceImpl implements StudentService {
         Student studentResponseEntity = studentRepository.save(studentEntityToBeSaved);
         return objectMapper.convertValue(studentResponseEntity, StudentDTO.class);
     }
-
 }
